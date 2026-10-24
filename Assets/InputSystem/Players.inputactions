@@ -1,0 +1,57 @@
+{
+    "version": 1,
+    "name": "Players",
+    "maps": [
+        {
+            "name": "2 Players",
+            "id": "9335ec2a-d831-4ea9-a124-61ab25f3764c",
+            "actions": [
+                {
+                    "name": "Player1",
+                    "type": "Button",
+                    "id": "5eba3c81-a0f9-4c03-a30c-7f85a0674156",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Player2",
+                    "type": "Button",
+                    "id": "e6973a5b-7121-49e9-bd26-d30ffeefed96",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "62e62ea9-0fb7-45f9-883b-79fb1b44c668",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "379fa7f9-5d81-47ab-b63c-7dc37df16ccb",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
