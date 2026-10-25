@@ -11,6 +11,11 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject P1Text;
     [SerializeField] private GameObject P2Text;
 
+    [SerializeField] private GameObject P1;
+    [SerializeField] private GameObject P2;
+    [SerializeField] private Transform P1Spawn;
+    [SerializeField] private Transform P2Spawn;
+
     [SerializeField] private TMP_Text P1Counter;
     [SerializeField] private TMP_Text P2Counter;
     [SerializeField] private Image panelBackColor;
@@ -55,6 +60,9 @@ public class GameUI : MonoBehaviour
             case GameState.Playing:
                 gameplayPanel.SetActive(true);
                 startPanel.SetActive(false);
+
+                P1.transform.position = P1Spawn.position;
+                P2.transform.position = P2Spawn.position;
             break;
             case GameState.Finished:
                 startPanel.SetActive(true);

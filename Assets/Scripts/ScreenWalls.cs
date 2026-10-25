@@ -2,22 +2,24 @@ using UnityEngine;
 
 public class ScreenWalls : MonoBehaviour
 {
-    [SerializeField] private float goalWidth = 1.75f;      // ancho del hueco (igual que tus porterías)
+    [SerializeField] private Vector2 fieldSize = new Vector2(6f, 10f);
+    [SerializeField] private float goalWidth = 1.75f;
     [SerializeField] private float thickness = 1f;
-    [SerializeField] private PhysicsMaterial2D wallMaterial;   // Friction 0, Bounciness ~0.9
+    [SerializeField] private PhysicsMaterial2D wallMaterial;
+
+    public Vector2 FieldSize => fieldSize;
 
     void Start()
     {
-        Camera cam = Camera.main;
-        float h = cam.orthographicSize;
-        float w = h * cam.aspect;
-        Vector2 c = cam.transform.position;
+        float h = fieldSize.y / 2f;
+        float w = fieldSize.x / 2f;
+        Vector2 c = transform.position;
 
         // Laterales (altura extra para cubrir las esquinas)
         CreateWall("Left", c + new Vector2(-w - thickness / 2, 0), new Vector2(thickness, 2 * h + 2 * thickness));
         CreateWall("Right", c + new Vector2(w + thickness / 2, 0), new Vector2(thickness, 2 * h + 2 * thickness));
 
-        // Arriba y abajo, cada uno en dos tramos dejando el hueco de la portería
+        // Arriba y abajo, cada uno en dos tramos dejando el hueco de la porteria
         float segW = Mathf.Max(0.1f, w - goalWidth / 2);
         float segX = goalWidth / 2 + segW / 2;
         foreach (float ySign in new[] { 1f, -1f })
