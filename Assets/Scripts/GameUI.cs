@@ -46,8 +46,6 @@ public class GameUI : MonoBehaviour
 
     private void OnStateChanged(GameState state)
     {
-        Debug.Log($"He cambiado de estado. Estado actual: {state}");
-
         switch (state)
         {   
             case GameState.Menu:

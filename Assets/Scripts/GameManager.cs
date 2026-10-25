@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<GameState> StateChanged;
     public event Action PuntutationChanged;
+    public event Action<int> RoundReset;
+
+    public const int PointsToWin = 7;
 
     private void Awake()
     {
@@ -36,6 +39,17 @@ public class GameManager : MonoBehaviour
         P1Points += pointToP1;
         P2Points += pointToP2;
         PuntutationChanged?.Invoke();
+
+        if (P1Points >= PointsToWin || P2Points >= PointsToWin)
+        {
+            P1Win = P1Points > P2Points;
+            FinishGame();
+        }
+        else
+        {
+            int receiver = pointToP1 > 0 ? 2 : 1;
+            RoundReset?.Invoke(receiver);
+        }
     }
 
     public void StartGame()
@@ -45,7 +59,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         P1Points = 0;
         P2Points = 0;
+        P1Win = false;
         StateChanged?.Invoke(State);
+        PuntutationChanged?.Invoke();
+        RoundReset?.Invoke(UnityEngine.Random.Range(1, 3));   // saque inicial aleatorio
     }
 
     public void FinishGame()
