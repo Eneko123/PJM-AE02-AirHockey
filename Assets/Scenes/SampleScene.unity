@@ -973,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &652833018
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1862,6 +1862,7 @@ MonoBehaviour:
   P2Text: {fileID: 1672031264}
   P1Counter: {fileID: 1544662487}
   P2Counter: {fileID: 870369333}
+  panelBackColor: {fileID: 652833019}
 --- !u!1 &1544662485
 GameObject:
   m_ObjectHideFlags: 0
