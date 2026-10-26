@@ -20,7 +20,7 @@ public class Goals : MonoBehaviour
     {
         if (collision.TryGetComponent(out Disc disc))
         {
-            gm.PuntuationChange(pointToP1, pointToP2);
+            gm.AddPoints(pointToP1, pointToP2);
         }
     }
 }

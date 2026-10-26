@@ -30,7 +30,7 @@ public class GameUI : MonoBehaviour
         if (gm == null) gm = GameManager.Instance;
 
         gm.StateChanged += OnStateChanged;
-        gm.PuntutationChanged += OnPuntuationChanged;
+        gm.PointsChanged += OnPuntuationChanged;
 
         playButton.onClick.AddListener(gm.StartGame);
 
@@ -39,8 +39,8 @@ public class GameUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        gm.StateChanged -= OnStateChanged;
-        gm.PuntutationChanged -= OnPuntuationChanged;
+        if (gm != null) gm.StateChanged -= OnStateChanged;
+        if (gm != null) gm.PointsChanged -= OnPuntuationChanged;
     }
 
     private void OnPuntuationChanged()

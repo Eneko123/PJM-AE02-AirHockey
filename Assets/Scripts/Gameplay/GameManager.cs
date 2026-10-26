@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.CullingGroup;
 
 public enum GameState { Menu, Playing, Finished}
 
@@ -14,20 +13,21 @@ public class GameManager : MonoBehaviour
     public bool P1Win { get; private set; }
 
     public event Action<GameState> StateChanged;
-    public event Action PuntutationChanged;
+    public event Action PointsChanged;
     public event Action<int> RoundReset;
 
     public const int PointsToWin = 7;
 
+    private IHapticService haptics;
+
     private void Awake()
     {
-        Application.targetFrameRate = 60;
-
         Instance = this;
-
         State = GameState.Menu;
-
         Time.timeScale = 0;
+
+        Application.targetFrameRate = 60;
+        haptics = HapticServiceFactory.Create();
     }
 
     private void OnDestroy()
@@ -35,12 +35,18 @@ public class GameManager : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
-    public void PuntuationChange(int pointToP1, int pointToP2)
+    private void OnApplicationPause(bool paused)
+    {
+        Time.timeScale = (paused || State != GameState.Playing) ? 0f : 1f;
+    }
+
+    public void AddPoints(int pointToP1, int pointToP2)
     {
         if (State != GameState.Playing) return;
         P1Points += pointToP1;
         P2Points += pointToP2;
-        PuntutationChanged?.Invoke();
+        PointsChanged?.Invoke();
+        haptics.Pulse(); // vibracion al marcar
 
         if (P1Points >= PointsToWin || P2Points >= PointsToWin)
         {
@@ -63,7 +69,7 @@ public class GameManager : MonoBehaviour
         P2Points = 0;
         P1Win = false;
         StateChanged?.Invoke(State);
-        PuntutationChanged?.Invoke();
+        PointsChanged?.Invoke();
         RoundReset?.Invoke(UnityEngine.Random.Range(1, 3));   // saque inicial aleatorio
     }
 
